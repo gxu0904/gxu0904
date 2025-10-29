@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://your-username.github.io/gxu0904/sitemap.xml
+
+
