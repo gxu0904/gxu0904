@@ -39,6 +39,13 @@ export function Terminal() {
     scrollToBottom();
   }, [history, scrollToBottom]);
 
+  // Auto-focus input after each command execution
+  useEffect(() => {
+    if (!isProcessing) {
+      inputRef.current?.focus();
+    }
+  }, [isProcessing, history]);
+
   const handleCommand = async (commandText: string) => {
     if (!commandText.trim()) return;
 
@@ -55,6 +62,7 @@ export function Terminal() {
       setInput('');
       setIsProcessing(false);
       setShowWelcome(false);
+      // Focus will be triggered by useEffect
       return;
     }
 
@@ -65,6 +73,7 @@ export function Terminal() {
     setInput('');
     setIsProcessing(false);
     setShowWelcome(false);
+    // Focus will be triggered by useEffect
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
