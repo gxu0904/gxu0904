@@ -3,21 +3,98 @@
 @tailwind utilities;
 
 :root {
-  --radius: 10px;
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { @apply bg-white; }
-  .container { @apply mx-auto px-4 max-w-6xl; }
-  h1, h2, h3 { @apply font-display; }
+  * {
+    @apply border-gray-700;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar styling for terminal */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
 }
 
-@layer components {
-  .btn { @apply inline-flex items-center justify-center rounded-md border border-navy-200 px-4 py-2 text-sm font-medium transition-colors; }
-  .btn-primary { @apply bg-navy-600 text-white border-transparent hover:bg-navy-500 shadow-soft; }
-  .btn-ghost { @apply bg-transparent hover:bg-navy-50; }
-  .card { @apply rounded-xl border border-navy-200 bg-white shadow-soft; }
+/* Markdown prose styles for terminal output */
+.prose-invert {
+  @apply text-gray-300;
+}
+
+.prose-invert h1 {
+  @apply text-cyan-400 text-2xl font-bold mb-4 mt-6;
+}
+
+.prose-invert h2 {
+  @apply text-green-400 text-xl font-bold mb-3 mt-5;
+}
+
+.prose-invert h3 {
+  @apply text-blue-400 text-lg font-bold mb-2 mt-4;
+}
+
+.prose-invert p {
+  @apply mb-3 leading-relaxed;
+}
+
+.prose-invert ul {
+  @apply list-disc list-inside mb-3 space-y-1;
+}
+
+.prose-invert li {
+  @apply text-gray-300;
+}
+
+.prose-invert strong {
+  @apply text-white font-semibold;
+}
+
+.prose-invert a {
+  @apply text-blue-400 hover:text-blue-300 underline;
+}
+
+.prose-invert code {
+  @apply bg-gray-800 px-1.5 py-0.5 rounded text-cyan-400;
+}
+
+/* Smooth animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
 }
 
 
