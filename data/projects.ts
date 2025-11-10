@@ -9,25 +9,25 @@ export const projects: Project[] = [
   {
     title: 'LightAid',
     description: 'Affordable smart lighting for disaster relief and off-grid communities.',
-    demo: 'https://example.com/lightaid',
-    github: 'https://github.com/your/lightaid',
+    demo: 'https:lightaid.net',
+    github: 'https://github.com/gxu0904',
   },
   {
     title: 'StudyAP',
     description: 'AI-guided AP prep with practice, analytics, and personalized study plans.',
-    demo: 'https://example.com/studyap',
-    github: 'https://github.com/your/studyap',
+    demo: 'https://studyap.org',
+    github: 'https://github.com/gxu0904',
   },
   {
     title: 'DECA Automation Suite',
     description: 'Tools that streamline event logistics, role assignments, and scoring.',
-    demo: 'https://example.com/deca-suite',
-    github: 'https://github.com/your/deca-suite',
+    demo: 'https://github.com/gxu0904',
+    github: 'https://github.com/gxu0904',
   },
   {
     title: 'Nano-grinding Research',
     description: 'Data pipelines and models for precision nano-grinding process diagnostics.',
-    demo: 'https://example.com/nanogrinding',
+    demo: 'https://github.com/gxu0904',
   },
 ];
 
