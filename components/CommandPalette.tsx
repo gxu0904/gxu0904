@@ -40,22 +40,46 @@ export function CommandPalette({ sections }: CommandPaletteProps) {
     setSearch('');
   };
 
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+  }, []);
+
   return (
     <>
-      {/* Trigger hint */}
+      {/* Trigger hint - visible pill button */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="fixed top-8 left-8 z-50"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+        className="fixed top-6 left-6 z-50"
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
       >
         <button
           onClick={() => setIsOpen(true)}
-          className="font-mono text-xs text-foreground/30 hover:text-foreground/60 transition-colors tracking-wider uppercase"
+          aria-label="Open command palette"
+          className="px-3 py-1.5 bg-background/80 backdrop-blur-sm border border-foreground/20 rounded-full font-mono text-xs text-foreground/60 hover:text-foreground hover:border-foreground/40 transition-all shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-foreground/50 focus:ring-offset-2 focus:ring-offset-background"
         >
-          <span className="hidden md:inline">⌘K </span>
+          <span className="hidden md:inline">
+            {isMac ? '⌘' : 'Ctrl'}K
+          </span>
           <span className="md:hidden">Menu</span>
         </button>
+        <AnimatePresence>
+          {showTooltip && (
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 5 }}
+              className="absolute left-0 top-full mt-2 px-2 py-1 bg-foreground text-background text-xs font-mono rounded whitespace-nowrap pointer-events-none"
+            >
+              Press {isMac ? '⌘K' : 'Ctrl+K'}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       {/* Command Palette Modal */}
@@ -78,7 +102,12 @@ export function CommandPalette({ sections }: CommandPaletteProps) {
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               className="fixed top-1/4 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 px-4"
             >
-              <div className="bg-background rounded-lg shadow-lg border border-foreground/10 overflow-hidden">
+              <div 
+                className="bg-background rounded-lg shadow-lg border border-foreground/10 overflow-hidden"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Command palette"
+              >
                 {/* Search Input */}
                 <div className="p-4 border-b border-foreground/10">
                   <input
@@ -98,7 +127,7 @@ export function CommandPalette({ sections }: CommandPaletteProps) {
                       <button
                         key={section.id}
                         onClick={() => navigateToSection(section.id)}
-                        className="w-full px-4 py-3 text-left hover:bg-foreground/5 transition-colors font-sans text-foreground"
+                        className="w-full px-4 py-3 text-left hover:bg-foreground/5 transition-colors font-sans text-foreground focus:outline-none focus:bg-foreground/5 focus:ring-2 focus:ring-foreground/50"
                       >
                         {section.label}
                       </button>
