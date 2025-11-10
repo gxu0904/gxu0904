@@ -1,16 +1,30 @@
 import './globals.css';
-import { JetBrains_Mono } from 'next/font/google';
+import { Playfair_Display, Inter, IBM_Plex_Mono } from 'next/font/google';
 import type { Metadata } from 'next';
 
-const jetbrainsMono = JetBrains_Mono({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-mono',
+  variable: '--font-serif',
+  display: 'swap',
+  weight: ['400', '600', '700', '900'],
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
   display: 'swap',
 });
 
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  weight: ['400', '500', '600'],
+});
+
 export const metadata: Metadata = {
-  title: 'Grace Xu — Engineer • Builder • Operator',
-  description: 'Software engineer passionate about building products that create meaningful impact. Explore my projects and experience through an interactive terminal interface.',
+  title: 'Grace Xu — Designing logic, systems, and stories',
+  description: 'Engineer. Researcher. Builder. Exploring the intersection of technology, design, and meaningful impact.',
   keywords: ['Grace Xu', 'Software Engineer', 'Full Stack Developer', 'Portfolio', 'React', 'Next.js', 'TypeScript'],
   authors: [{ name: 'Grace Xu' }],
   creator: 'Grace Xu',
@@ -20,8 +34,8 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Grace Xu — Engineer • Builder • Operator',
-    description: 'Software engineer passionate about building products that create meaningful impact. Explore my projects through an interactive terminal.',
+    title: 'Grace Xu — Designing logic, systems, and stories',
+    description: 'Engineer. Researcher. Builder. Exploring the intersection of technology, design, and meaningful impact.',
     url: 'https://gxu0904.github.io',
     siteName: 'Grace Xu Portfolio',
     locale: 'en_US',
@@ -37,8 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Grace Xu — Engineer • Builder • Operator',
-    description: 'Software engineer passionate about building products that create meaningful impact.',
+    title: 'Grace Xu — Designing logic, systems, and stories',
+    description: 'Engineer. Researcher. Builder. Exploring the intersection of technology, design, and meaningful impact.',
     creator: '@gracexu',
     images: ['/og-image.png'],
   },
@@ -61,7 +75,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${jetbrainsMono.variable} font-mono min-h-dvh bg-background text-foreground antialiased`}>
+      <body className={`${playfair.variable} ${inter.variable} ${ibmPlexMono.variable} font-sans min-h-dvh bg-background text-foreground antialiased`}>
         {children}
       </body>
     </html>
