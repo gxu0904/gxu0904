@@ -3,154 +3,118 @@
     {
       "slug": "studyap",
       "name": "StudyAP",
-      "tagline": "Free AP exam prep platform serving 10K+ students",
-      "stack": ["React", "Next.js", "TypeScript", "PostgreSQL", "Vercel"],
-      "year": "2023-2024",
-      "role": "Founder & Lead Developer",
-      "description": "Built a comprehensive platform providing free study materials, practice questions, and exam strategies for AP students. Grew organically to 10,000+ active users through word-of-mouth and community engagement.",
+      "tagline": "AI-powered AP and standardized test prep platform for 1K+ students",
+      "stack": ["React", "Next.js", "TypeScript", "Supabase", "Vercel"],
+      "year": "2023–Present",
+      "role": "Co-Founder & CEO/CTO",
+      "description": "Built an AI-driven study platform generating practice questions, adaptive resources, and analytics for AP and SAT students. Led technical and product development while scaling to over a thousand users through community partnerships and data-driven iteration.",
       "highlights": [
-        "Designed and implemented adaptive quiz engine with 2,000+ practice questions across 8 AP subjects",
-        "Built analytics dashboard showing student progress, weak areas, and study recommendations",
-        "Achieved 95+ Lighthouse scores across all metrics with optimized SSR and image delivery",
-        "Implemented real-time collaboration features for study groups using WebSockets",
-        "Created content management system for educators to contribute and review materials"
+        "Developed a question-generation engine using OpenAI and custom fine-tuned models",
+        "Integrated progress analytics and topic-level mastery tracking for 10+ subjects",
+        "Designed an intuitive student dashboard and admin panel for content management",
+        "Scaled backend architecture to support 10K+ question interactions per day",
+        "Featured in multiple school and student-led publications for educational innovation"
       ],
       "metrics": [
-        "10,000+ practice questions",
+        "1K+ students reached",
+        "10K+ practice questions",
         "10+ subjects covered",
-        "1,500+ unique visitors"
+        "Fully bootstrapped platform"
       ],
-      "links": {
-        "demo": "https://studyap.org",
-        "repo": "https://github.com/gxu0904/sss"
-      }
+      "awards": [
+        "Top 3 Finalist – Global Youth Entrepreneurship Challenge (DE:CODE), 2024"
+      ]
     },
     {
       "slug": "lightaid",
-      "name": "LightAid Lead",
-      "tagline": "Internal automation tools reducing manual work by 70%",
+      "name": "LightAid",
+      "tagline": "Nonprofit tackling global inequalities through light, education, and care",
       "stack": ["Python", "FastAPI", "React", "PostgreSQL", "AWS Lambda"],
-      "year": "2023",
-      "role": "Operations Engineer",
-      "description": "Developed suite of internal tools to automate repetitive workflows at LightAid, a nonprofit providing solar solutions to underserved communities. Focused on inventory management, donor tracking, and deployment logistics.",
+      "year": "2023–Present",
+      "role": "Lead & CTO",
+      "description": "Leads technology and operations at LightAid, a 501(c)(3) nonprofit addressing light poverty, period poverty, and educational inequality across developing regions. Built systems for logistics, volunteer coordination, and donation tracking.",
       "highlights": [
-        "Built inventory management system tracking 5,000+ solar units across multiple warehouses",
-        "Automated donor reporting pipeline, reducing report generation time from 4 hours to 5 minutes",
-        "Created deployment planning tool optimizing logistics for 100+ installations per month",
-        "Integrated Slack notifications and alerts for critical inventory and deployment events",
-        "Implemented role-based access control and audit logging for compliance"
+        "Scaled international network to 750+ volunteers across 10+ countries",
+        "Developed automation tools reducing manual reporting by 70%",
+        "Tracked and deployed 17K+ donations reaching communities in China, Chile, and Mexico",
+        "Built donor and impact analytics dashboards for transparency and reporting"
       ],
       "metrics": [
-        "70% reduction in manual workflows",
-        "5,000+ units tracked",
-        "4hrs → 5min report generation",
-        "100+ deployments/month optimized"
-      ],
-      "links": {
-        "repo": "https://github.com/gxu0904/lightaid-ops"
-      }
+        "17K+ donations delivered",
+        "10K+ people impacted",
+        "$4K+ fundraised",
+        "750+ global volunteers"
+      ]
     },
     {
       "slug": "frc-robotics",
-      "name": "FRC Team 3256 Warriorborgs Robot Code",
-      "tagline": "Real-time robot performance analytics for competitive robotics",
-      "stack": ["React Native", "Firebase", "TypeScript", "Python", "TensorFlow"],
-      "year": "2022-2023",
-      "role": "Lead Developer",
-      "description": "Mobile-first scouting application for FIRST Robotics Competition teams to collect, analyze, and visualize robot performance data during competitions. Used by 50+ teams at regional and championship events.",
+      "name": "FRC Team 3256 WarriorBorgs",
+      "tagline": "Software systems for competitive robotics automation and analytics",
+      "stack": ["Java", "Python", "OpenCV", "PhotonVision", "WPILib"],
+      "year": "2021–Present",
+      "role": "Software Lead",
+      "description": "Leads the software subteam of FRC Team 3256, developing autonomous, vision, and control systems for competition robots. Built real-time scouting tools and autonomous routines powering award-winning performance at regional and world events.",
       "highlights": [
-        "Designed offline-first architecture with Firebase sync for reliable data collection in poor network conditions",
-        "Built statistical models predicting match outcomes with 78% accuracy using historical performance data",
-        "Created intuitive data entry interface reducing scout training time from 2 hours to 15 minutes",
-        "Implemented real-time match strategy recommendations based on alliance partner analysis",
-        "Exported data visualizations and reports for strategy meetings and alliance selections"
+        "Built path-planning and auto-alignment systems using vision and PID control",
+        "Developed scouting data pipelines for real-time match analytics",
+        "Led a team of 5 software members to deploy modular, fault-tolerant robot code",
+        "Created web-based dashboards for robot diagnostics and data visualization"
       ],
       "metrics": [
-        "50+ teams using system",
-        "78% match prediction accuracy",
-        "15min scout training time",
-        "2,000+ matches analyzed"
+        "3× Engineering Inspiration Awards (2022, 2024, 2025)",
+        "Creativity Award (Daly Division @ FIRST Championship, 2025)",
+        "78% autonomous accuracy in testing"
       ],
-      "links": {
-        "demo": "https://frc-scout.example.com",
-        "repo": "https://github.com/gxu0904/frc-scouting"
-      }
+      "awards": [
+        "Creativity Award – Rockwell Automation, World Championship (2025)",
+        "Regional Engineering Inspiration Awards – San Francisco & Ventura (2025, 2024)",
+        "Excellence in Engineering & Innovation in Control Awards (2025)"
+      ]
     },
     {
       "slug": "deca-event-scheduler",
-      "name": "DECA Event Scheduler",
-      "tagline": "Automated event scheduling system for chapter of 200+ members",
-      "stack": ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind"],
-      "year": "2023",
-      "role": "Solo Developer",
-      "description": "Built intelligent scheduling system for DECA business competitions, automatically generating conflict-free schedules for 500+ students across 40+ events while respecting room capacity, judge availability, and student preferences.",
+      "name": "DECA Automation Tools",
+      "tagline": "Event scheduler, tabulator, and matcher for 200+ DECA members",
+      "stack": ["Go", "Python", "Next.js", "TypeScript", "PostgreSQL"],
+      "year": "2023–Present",
+      "role": "Developer & VP of Operations",
+      "description": "Built a suite of automation systems for Valley Christian DECA to streamline chapter operations and competition logistics. Tools include an event scheduler, Python score tabulator, and C++ roommate matcher used across multiple conferences.",
       "highlights": [
-        "Implemented constraint satisfaction algorithm handling complex scheduling requirements",
-        "Reduced manual scheduling time from 20 hours to 2 minutes with automated conflict resolution",
-        "Built judge and room management interface with drag-and-drop schedule adjustments",
-        "Generated printable schedules, room assignments, and judge packets automatically",
-        "Added real-time notifications for schedule changes via email and SMS"
+        "Automated scheduling for 200+ members across 40+ events with zero conflicts",
+        "Reduced manual scheduling time from 20 hours to 2 minutes",
+        "Created tabulator used for VCMC and SCDC competition data",
+        "Built robust matching algorithm to pair members for conferences efficiently"
       ],
       "metrics": [
-        "500+ students scheduled",
-        "40+ concurrent events",
-        "20hrs → 2min scheduling time",
-        "Zero scheduling conflicts"
+        "200+ members served",
+        "40+ events managed",
+        "20hrs → 2min scheduling",
+        "Zero scheduling errors"
       ],
-      "links": {
-        "repo": "https://github.com/gxu0904/deca-scheduler"
-      }
+      "awards": [
+        "1st Place – DECA ICDC VBC Sports (2025)",
+        "2nd Place – Western Region VBC Sports (2024)"
+      ]
     },
     {
       "slug": "portfolio-cli",
-      "name": "CLI Portfolio",
-      "tagline": "Interactive terminal-based portfolio website",
+      "name": "Personal Portfolio",
+      "tagline": "Minimal interactive portfolio built with Next.js 15",
       "stack": ["Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      "year": "2024",
+      "year": "2025",
       "role": "Designer & Developer",
-      "description": "Modern take on the classic terminal portfolio, built with Next.js 15 and optimized for performance and accessibility. Features command history, tab autocomplete, and a hidden Easter egg.",
+      "description": "Built a modern, CLI-style portfolio emphasizing performance and accessibility. Features command history, tab autocomplete, and smooth animations while maintaining a lightweight footprint.",
       "highlights": [
-        "Built custom CLI parser with command routing, argument validation, and error handling",
-        "Implemented keyboard-first UX with arrow key history and tab autocomplete",
-        "Achieved 95+ Lighthouse scores across all categories (Performance, Accessibility, SEO, Best Practices)",
-        "Added smooth animations and transitions using Framer Motion while maintaining 60fps",
-        "Fully responsive design adapting from mobile touch to desktop keyboard workflows"
+        "95+ Lighthouse scores across all metrics",
+        "Custom CLI parser and routing logic",
+        "Keyboard-first UX and responsive design",
+        "Hidden Easter eggs and minimal aesthetic"
       ],
       "metrics": [
         "95+ Lighthouse scores",
-        "12 interactive commands",
-        "< 100kb initial bundle",
-        "60fps animations"
-      ],
-      "links": {
-        "demo": "https://gxu0904.github.io",
-        "repo": "https://github.com/gxu0904/gxu0904.github.io"
-      }
-    },
-    {
-      "slug": "market-analyzer",
-      "name": "Market Sentiment Analyzer",
-      "tagline": "ML-powered tool analyzing social media for market trends",
-      "stack": ["Python", "scikit-learn", "React", "FastAPI", "Docker"],
-      "year": "2023",
-      "role": "Full-Stack Developer",
-      "description": "Experimental project analyzing social media sentiment to identify emerging market trends and consumer preferences. Built for learning NLP and time-series analysis techniques.",
-      "highlights": [
-        "Implemented NLP pipeline processing 100K+ social media posts daily",
-        "Built sentiment classification model achieving 82% accuracy on validation set",
-        "Created interactive dashboard visualizing sentiment trends over time",
-        "Designed RESTful API serving real-time and historical sentiment data",
-        "Containerized application with Docker for easy deployment and scaling"
-      ],
-      "metrics": [
-        "100K+ posts processed daily",
-        "82% sentiment accuracy",
-        "15+ data sources integrated",
-        "Real-time trend detection"
-      ],
-      "links": {
-        "repo": "https://github.com/gxu0904/market-analyzer"
-      }
+        "<100kb bundle size",
+        "12+ interactive commands"
+      ]
     }
   ]
 }
