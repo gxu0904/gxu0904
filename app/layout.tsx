@@ -23,7 +23,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Grace Xu — Designing logic, systems, and stories',
+  title: 'Grace Xu',
   description: 'Engineer. Researcher. Builder. Exploring the intersection of technology, design, and meaningful impact.',
   keywords: ['Grace Xu', 'Software Engineer', 'Full Stack Developer', 'Portfolio', 'React', 'Next.js', 'TypeScript'],
   authors: [{ name: 'Grace Xu' }],
