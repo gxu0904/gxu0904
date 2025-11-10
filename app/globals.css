@@ -3,89 +3,57 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  --background: #FAFAFA;
+  --foreground: #1C1C1C;
+  --accent: #F2A900;
 }
 
 .dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+  --background: #0A0E2A;
+  --foreground: #FFFFFF;
+  --accent: #99CFFF;
 }
 
 @layer base {
   * {
-    @apply border-gray-700;
+    @apply border-gray-200;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
 
-  /* Scrollbar styling for terminal */
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar - minimal */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-900;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-700 rounded;
+    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-600;
+    @apply bg-gray-400 dark:bg-gray-600;
   }
 }
 
-/* Markdown prose styles for terminal output */
-.prose-invert {
-  @apply text-gray-300;
-}
-
-.prose-invert h1 {
-  @apply text-cyan-400 text-2xl font-bold mb-4 mt-6;
-}
-
-.prose-invert h2 {
-  @apply text-green-400 text-xl font-bold mb-3 mt-5;
-}
-
-.prose-invert h3 {
-  @apply text-blue-400 text-lg font-bold mb-2 mt-4;
-}
-
-.prose-invert p {
-  @apply mb-3 leading-relaxed;
-}
-
-.prose-invert ul {
-  @apply list-disc list-inside mb-3 space-y-1;
-}
-
-.prose-invert li {
-  @apply text-gray-300;
-}
-
-.prose-invert strong {
-  @apply text-white font-semibold;
-}
-
-.prose-invert a {
-  @apply text-blue-400 hover:text-blue-300 underline;
-}
-
-.prose-invert code {
-  @apply bg-gray-800 px-1.5 py-0.5 rounded text-cyan-400;
-}
-
-/* Smooth animations */
-@keyframes fadeIn {
+/* Typography animations */
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -93,8 +61,60 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out;
+}
+
 .animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Hover highlight effect for key words */
+.highlight-hover {
+  @apply transition-colors duration-300;
+  position: relative;
+}
+
+.highlight-hover:hover {
+  color: var(--accent);
+}
+
+/* Smooth reveal animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom cursor - hide default cursor when custom cursor is active */
+.custom-cursor-active * {
+  cursor: none !important;
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .custom-cursor-active * {
+    cursor: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor-active * {
+    cursor: auto !important;
+  }
 }
 
 
