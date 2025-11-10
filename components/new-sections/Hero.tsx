@@ -41,9 +41,18 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="font-mono text-sm md:text-base text-foreground/60 tracking-wider uppercase"
+          className="font-mono text-sm md:text-base text-foreground/60 tracking-wider uppercase mb-6"
         >
           Engineer · Researcher · Builder
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="font-mono text-xs md:text-sm text-foreground/40 tracking-wide"
+        >
+          Previously with FRC 3256 · DECA Ops · Published in Materials Today Comm.
         </motion.p>
       </motion.div>
 
