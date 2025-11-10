@@ -1,6 +1,12 @@
 'use client';
 
-import { Terminal } from '@/components/Terminal';
+import { Hero } from '@/components/new-sections/Hero';
+import { About } from '@/components/new-sections/About';
+import { Projects } from '@/components/new-sections/Projects';
+import { Contact } from '@/components/new-sections/Contact';
+import { CommandPalette } from '@/components/CommandPalette';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { Cursor } from '@/components/Cursor';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -21,10 +27,33 @@ export default function Home() {
     }
   }, []);
 
+  const sections = [
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
+  ];
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black dark:from-black dark:via-gray-950 dark:to-gray-900 p-4 md:p-8 flex items-center justify-center">
-      <Terminal />
-    </main>
+    <>
+      <Cursor />
+      <ThemeToggle />
+      <CommandPalette sections={sections} />
+      <main className="min-h-screen bg-background">
+        <div id="hero">
+          <Hero />
+        </div>
+        <div id="about">
+          <About />
+        </div>
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="contact">
+          <Contact />
+        </div>
+      </main>
+    </>
   );
 }
 
