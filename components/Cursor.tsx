@@ -7,10 +7,15 @@ export function Cursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isReading, setIsReading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isImage, setIsImage] = useState(false);
+  const [isButton, setIsButton] = useState(false);
   const [pulseOpacity, setPulseOpacity] = useState(0.3);
   const [isTouch, setIsTouch] = useState(true); // Start as true to avoid flash
   const [isDark, setIsDark] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const cursorRef = useRef<HTMLDivElement>(null);
+  const cursorDotRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>();
   const isReducedMotion = useRef(false);
 
@@ -46,11 +51,24 @@ export function Cursor() {
     const handleMouseMove = (e: MouseEvent) => {
       targetX = e.clientX;
       targetY = e.clientY;
+      setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target) return;
+
+      // Check for images
+      const isImageElement = target.tagName === 'IMG' || target.closest('img');
+      setIsImage(!!isImageElement);
+
+      // Check for buttons
+      const isButtonElement =
+        target.tagName === 'BUTTON' ||
+        target.closest('button') ||
+        target.getAttribute('role') === 'button' ||
+        target.classList.contains('cursor-pointer');
+      setIsButton(!!isButtonElement);
 
       // Check for interactive elements
       const isInteractive =
@@ -61,7 +79,8 @@ export function Cursor() {
         target.classList.contains('highlight-hover') ||
         target.closest('.highlight-hover') ||
         target.onclick !== null ||
-        target.getAttribute('role') === 'button';
+        target.getAttribute('role') === 'button' ||
+        isImageElement;
 
       setIsHovering(!!isInteractive);
 
@@ -78,7 +97,7 @@ export function Cursor() {
           target.tagName === 'H5' ||
           target.tagName === 'H6' ||
           target.tagName === 'LI' ||
-          target.tagName === 'DIV' ||
+          (target.tagName === 'DIV' && !isImageElement) ||
           computedStyle.cursor === 'text' ||
           computedStyle.userSelect === 'text';
 
@@ -90,15 +109,27 @@ export function Cursor() {
 
     const handleMouseDown = () => {
       setIsClicking(true);
+      setIsDragging(false);
     };
 
     const handleMouseUp = () => {
       setIsClicking(false);
+      setTimeout(() => setIsDragging(false), 100);
     };
 
     const handleMouseLeave = () => {
       setIsHovering(false);
       setIsReading(false);
+      setIsImage(false);
+      setIsButton(false);
+    };
+
+    const handleDragStart = () => {
+      setIsDragging(true);
+    };
+
+    const handleDragEnd = () => {
+      setIsDragging(false);
     };
 
     // Start animation loop
@@ -109,6 +140,8 @@ export function Cursor() {
     document.addEventListener('mouseout', handleMouseLeave, true);
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('dragstart', handleDragStart);
+    document.addEventListener('dragend', handleDragEnd);
 
     return () => {
       if (rafRef.current) {
@@ -119,12 +152,14 @@ export function Cursor() {
       document.removeEventListener('mouseout', handleMouseLeave, true);
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('dragstart', handleDragStart);
+      document.removeEventListener('dragend', handleDragEnd);
     };
   }, []);
 
   // Opacity pulse animation (only when not hovering or reading)
   useEffect(() => {
-    if (isHovering || isReading) {
+    if (isHovering || isReading || isClicking) {
       setPulseOpacity(1);
       return;
     }
@@ -134,7 +169,21 @@ export function Cursor() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isHovering, isReading]);
+  }, [isHovering, isReading, isClicking]);
+
+  // Update cursor dot position (faster, smaller dot)
+  useEffect(() => {
+    if (!cursorDotRef.current) return;
+
+    const updateDot = () => {
+      if (cursorDotRef.current) {
+        cursorDotRef.current.style.transform = `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`;
+      }
+    };
+
+    const rafId = requestAnimationFrame(updateDot);
+    return () => cancelAnimationFrame(rafId);
+  }, [mousePosition]);
 
   // Don't show cursor on touch devices
   useEffect(() => {
@@ -173,9 +222,26 @@ export function Cursor() {
   const hoverRingColor = 'rgba(150, 180, 220, 0.4)'; // Light greyish blue
   const hoverGlowColor = 'rgba(150, 180, 220, 0.2)'; // Light greyish blue
   const readingColor = isDark ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)';
+  const imageColor = 'rgba(150, 180, 220, 0.25)';
+  const buttonColor = 'rgba(150, 180, 220, 0.2)';
+
+  // Determine cursor size and style based on state
+  const getCursorSize = () => {
+    if (isReading) return { width: '2px', height: '24px' };
+    if (isClicking) return { width: '8px', height: '8px' };
+    if (isDragging) return { width: '24px', height: '24px' };
+    if (isImage) return { width: '40px', height: '40px' };
+    if (isButton) return { width: '36px', height: '36px' };
+    if (isHovering) return { width: '32px', height: '32px' };
+    return { width: '10px', height: '10px' };
+  };
+
+  const cursorSize = getCursorSize();
+  const isLarge = isHovering || isImage || isButton;
 
   return (
     <>
+      {/* Main cursor (lagged) */}
       <div
         ref={cursorRef}
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
@@ -183,41 +249,55 @@ export function Cursor() {
           willChange: 'transform',
         }}
       >
-        {/* Main cursor */}
         <div
           className="absolute top-0 left-0"
           style={{
             transform: 'translate(-50%, -50%)',
-            width: isReading
-              ? '2px'
-              : isClicking
-              ? '8px'
-              : isHovering
-              ? '32px'
-              : '10px',
-            height: isReading
-              ? '24px'
-              : isClicking
-              ? '8px'
-              : isHovering
-              ? '32px'
-              : '10px',
+            width: cursorSize.width,
+            height: cursorSize.height,
             borderRadius: isReading ? '0' : '50%',
             backgroundColor: isReading
               ? readingColor
+              : isImage
+              ? imageColor
+              : isButton
+              ? buttonColor
               : isHovering
               ? hoverColor
               : defaultColor,
-            opacity: isReading ? 1 : isHovering ? 1 : pulseOpacity,
-            filter: isHovering ? 'blur(2px)' : 'none',
+            opacity: isReading || isHovering || isClicking ? 1 : pulseOpacity,
+            filter: isLarge ? 'blur(2px)' : 'none',
             boxShadow: isReading
               ? 'none'
-              : isHovering
-              ? `0 0 0 2px ${hoverRingColor}, 0 0 20px ${hoverGlowColor}`
+              : isLarge
+              ? `0 0 0 2px ${hoverRingColor}, 0 0 ${isImage ? '30px' : '20px'} ${hoverGlowColor}`
               : 'none',
-            transition: isClicking
-              ? 'width 0.1s ease-out, height 0.1s ease-out, opacity 0.1s ease-out, border-radius 0.1s ease-out'
-              : 'width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out, box-shadow 0.2s ease-out, filter 0.2s ease-out, border-radius 0.2s ease-out, background-color 0.2s ease-out',
+            border: isDragging ? `2px solid ${hoverRingColor}` : 'none',
+            transition: isClicking || isDragging
+              ? 'width 0.1s ease-out, height 0.1s ease-out, opacity 0.1s ease-out, border-radius 0.1s ease-out, border 0.1s ease-out'
+              : 'width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out, box-shadow 0.2s ease-out, filter 0.2s ease-out, border-radius 0.2s ease-out, background-color 0.2s ease-out, border 0.2s ease-out',
+          }}
+        />
+      </div>
+
+      {/* Fast cursor dot (follows immediately) */}
+      <div
+        ref={cursorDotRef}
+        className="fixed top-0 left-0 pointer-events-none z-[9998]"
+        style={{
+          willChange: 'transform',
+        }}
+      >
+        <div
+          className="absolute top-0 left-0"
+          style={{
+            transform: 'translate(-50%, -50%)',
+            width: '4px',
+            height: '4px',
+            borderRadius: '50%',
+            backgroundColor: isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)',
+            opacity: isHovering || isReading ? 0 : 1,
+            transition: 'opacity 0.2s ease-out',
           }}
         />
       </div>
