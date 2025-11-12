@@ -3,6 +3,7 @@
 import { Hero } from '@/components/new-sections/Hero';
 import { About } from '@/components/new-sections/About';
 import { Projects } from '@/components/new-sections/Projects';
+import { Art } from '@/components/new-sections/Art';
 import { Contact } from '@/components/new-sections/Contact';
 import { CommandPalette } from '@/components/CommandPalette';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -31,6 +32,7 @@ export default function Home() {
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
+    { id: 'art', label: 'Art' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -48,6 +50,9 @@ export default function Home() {
         </div>
         <div id="projects">
           <Projects />
+        </div>
+        <div id="art">
+          <Art />
         </div>
         <div id="contact">
           <Contact />
